@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AutoShowWebApplication.OrderType>
+
+@{
+    ViewData["Title"] = "Типи замовлень";
+}
+
+<h1>Доступні послуги</h1>
+
+<p>
+    <a asp-action="Create">Створити нову послугу</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.OrderTypeId">Редагувати</a> |
+                    <a asp-action="Details" asp-route-id="@item.OrderTypeId">Деталі</a> |
+                    <a asp-action="Delete" asp-route-id="@item.OrderTypeId">Видалити</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

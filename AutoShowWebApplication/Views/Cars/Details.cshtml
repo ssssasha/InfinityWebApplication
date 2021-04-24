@@ -1,0 +1,64 @@
+﻿@model AutoShowWebApplication.Car
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Деталі</h1>
+
+<div>
+    <h4>Автомобіль</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GraduationYear)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GraduationYear)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BodyType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BodyType.BodyTypeNames)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Color.ColorName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Drive)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Drive.DriveType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Model.ModelName)
+        </dd>
+    </dl>
+</div>
+@if (User.IsInRole("admin"))
+{
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.CarId">Редагувати</a> |
+        <a asp-action="IndexAuto">Повернутися до списку</a>
+    </div>
+}
+@if (!User.IsInRole("admin"))
+{
+    <div>
+        
+        <a asp-action="IndexAuto">Повернутися до списку</a>
+    </div>
+}

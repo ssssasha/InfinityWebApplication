@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AutoShowWebApplication.Model>
+
+@{
+    ViewData["Title"] = "Моделі";
+}
+
+<h1>Список моделей</h1>
+@if (User.IsInRole("admin"))
+{
+<p>
+    <a asp-action="Create">Додати нову модель</a>
+</p>}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ModelName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelName)
+            </td>
+            @if (User.IsInRole("admin"))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ModelId">Редагувати</a> |
+                    <a asp-action="Details" asp-route-id="@item.ModelId">Деталі</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ModelId">Видалити</a>
+                </td>
+}
+            @if (!User.IsInRole("admin"))
+            {
+                <td>
+                   
+                    <a asp-action="Details" asp-route-id="@item.ModelId">Деталі</a> 
+                    
+                </td>
+}
+        </tr>
+}
+    </tbody>
+</table>

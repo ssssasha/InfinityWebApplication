@@ -1,0 +1,87 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<AutoShowWebApplication.Car>
+
+@{
+    ViewData["Title"] = "Автомобілі";
+}
+
+<h1>Список автомобілів</h1>
+@if (User.IsInRole("admin"))
+{
+<p>
+    <a asp-action="CreateAuto">Додати автомобіль</a>
+
+</p>}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GraduationYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BodyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Drive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GraduationYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BodyType.BodyTypeNames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color.ColorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drive.DriveType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model.ModelName)
+            </td>
+            @if (User.IsInRole("admin"))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CarId">Редагувати</a> |
+                    <a asp-action="Details" asp-route-id="@item.CarId">Деталі</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CarId">Видалити</a>
+                </td>
+            }
+            @if (!User.IsInRole("admin"))
+            {
+                <td>
+                    
+                    <a asp-action="Details" asp-route-id="@item.CarId">Деталі</a> 
+                    
+                </td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>

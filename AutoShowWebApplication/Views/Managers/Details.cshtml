@@ -1,0 +1,38 @@
+﻿@model AutoShowWebApplication.Manager
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Деталі</h1>
+
+<div>
+    <h4>Менеджер</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Telephone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+    </dl>
+</div>
+@if (User.IsInRole("admin"))
+{
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ManagerId">Редагувати</a> |
+        <a asp-action="Index">Повернутися до списку</a>
+    </div>}
+@if (!User.IsInRole("admin"))
+{
+    <div>
+        
+        <a asp-action="Index">Повернутися до списку</a>
+    </div>}

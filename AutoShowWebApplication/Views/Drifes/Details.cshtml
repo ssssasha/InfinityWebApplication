@@ -1,0 +1,32 @@
+﻿@model AutoShowWebApplication.Drife
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Деталі</h1>
+
+<div>
+    <h4>Тип приводу</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DriveType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DriveType)
+        </dd>
+    </dl>
+</div>
+@if (User.IsInRole("admin"))
+{
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.DriveId">Редагувати</a> |
+        <a asp-action="Index">Повернутися до списку</a>
+    </div>}
+@if (!User.IsInRole("admin"))
+{
+    <div>
+       
+        <a asp-action="Index">Повернутися до списку</a>
+    </div>}

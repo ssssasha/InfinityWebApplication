@@ -1,0 +1,63 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model AutoShowWebApplication.Car
+
+@{
+    ViewData["Title"] = "CreateM";
+}
+
+<h1>Додавання автомобіля за типом кузова @ViewBag.BodyTypeNames</h1>
+
+<h4>Автомобіль</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateM">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ModelId" class="control-label"></label>
+                <select asp-for="ModelId" class="form-control" asp-items="ViewBag.ModelId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GraduationYear" class="control-label"></label>
+                <input asp-for="GraduationYear" class="form-control" />
+                <span asp-validation-for="GraduationYear" class="text-danger"></span>
+            </div>
+           <!-- <div class="form-group">
+                <label asp-for="BodyTypeId" class="control-label"></label>
+                <select asp-for="BodyTypeId" class="form-control" asp-items="ViewBag.BodyTypeId"></select>
+            </div>-->
+            <div class="form-group">
+                <label asp-for="ColorId" class="control-label"></label>
+                <select asp-for="ColorId" class="form-control" asp-items="ViewBag.ColorId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DriveId" class="control-label"></label>
+                <select asp-for="DriveId" class="form-control" asp-items="ViewBag.DriveId"></select>
+            </div>
+
+            <input type ="hidden" value="@ViewBag.BodyTypeId" name=" BodyTypeId" />
+
+            <div class="form-group">
+                <input type="submit" value="Створити" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="IndexM">Повернутися до списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

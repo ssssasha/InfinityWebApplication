@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AutoShowWebApplication.Car>
+
+@{
+    ViewData["Title"] = "Автомобілі за типом приводу";
+}
+
+<h1>Автомобілі за типом приводу @ViewBag.DriveType </h1>
+
+<p>
+    @Html.ActionLink("Додати новий автомобіль", "Create", new { driveId = ViewBag.DriveId })
+    
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GraduationYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BodyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Drive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GraduationYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BodyType.BodyTypeNames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color.ColorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drive.DriveType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model.ModelName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CarId">Редагувати</a> |
+                <a asp-action="Details" asp-route-id="@item.CarId">Деталі</a> |
+                <a asp-action="Delete" asp-route-id="@item.CarId">Видалити</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AutoShowWebApplication.Color>
+
+@{
+    ViewData["Title"] = "Кольори";
+}
+
+<h1>Список кольорів</h1>
+@if (User.IsInRole("admin"))
+{
+<p>
+    <a asp-action="Create">Додати новий колір</a>
+</p>}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ColorName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ColorName)
+            </td>
+            @if (User.IsInRole("admin"))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ColorId">Редагувати</a> |
+                    <a asp-action="Details" asp-route-id="@item.ColorId">Деталі</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ColorId">Видалити</a>
+                </td>
+}
+            @if (!User.IsInRole("admin"))
+            {
+                <td>
+                   
+                    <a asp-action="Details" asp-route-id="@item.ColorId">Деталі</a> 
+                    
+                </td>
+}
+        </tr>
+}
+    </tbody>
+</table>
