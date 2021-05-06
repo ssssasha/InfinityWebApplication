@@ -194,7 +194,10 @@ namespace AutoShowWebApplication.Controllers
                                     try
                                     {
                                         Car car = new Car();
-                                       
+                                        BodyType bt = new BodyType();
+                                        car.BodyType = bt;
+                                        Color cl = new Color();
+                                        car.Color = cl;
                                         car.BodyType.BodyTypeNames = row.Cell(2).Value.ToString();
                                         car.Color.ColorName = row.Cell(3).Value.ToString();
                                        
@@ -213,15 +216,17 @@ namespace AutoShowWebApplication.Controllers
                                                 if (a.Count > 0)
                                                 {
                                                     model = a[0];
+                                                car.ModelId = model.ModelId;
+
                                                 }
                                                 else
                                                 {
                                                     model = new Model();
                                                     model.ModelName = row.Cell(1).Value.ToString();
                                                     
-                                                    _context.Add(model);
+                                                    _context.Models.Add(model);
                                                 }
-                                            
+                                            car.Model = model;
                                             }
                                         
                                     }
@@ -255,14 +260,14 @@ namespace AutoShowWebApplication.Controllers
                     worksheet.Cell("B1").Value = "Тип кузова";
                     worksheet.Cell("C1").Value = "Колір";
                     worksheet.Row(1).Style.Font.Bold = true;
-                    var cars = c.Cars.ToList();
+                    var cars = c.Cars;
 
                     int j = 0;
                     foreach (var b in c.Cars)
                     {
-                        worksheet.Cell(j + 2, 1).Value = b.ModelId;
-                        worksheet.Cell(j + 2, 2).Value = b.BodyTypeId;
-                        worksheet.Cell(j + 2, 3).Value = b.ColorId;
+                        worksheet.Cell(j + 2, 1).Value = _context.Models.Where(m => m.ModelId == b.ModelId).FirstOrDefault().ModelName;
+                        worksheet.Cell(j + 2, 2).Value = _context.BodyTypes.Where(m => m.BodyTypeId == b.BodyTypeId).FirstOrDefault().BodyTypeNames;
+                        worksheet.Cell(j + 2, 3).Value = _context.Colors.Where(m => m.ColorId == b.ColorId).FirstOrDefault().ColorName;
                         j++;
                     }
                 }

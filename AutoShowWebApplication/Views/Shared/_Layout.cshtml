@@ -26,14 +26,16 @@
     </li>-->
                         @if (User.IsInRole("admin"))
                         {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Управління ролями</a>
-                        </li>}
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Управління ролями</a>
+                            </li>
+                        }
                         @if (User.IsInRole("admin"))
                         {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Управління користувачами</a>
-                        </li>}
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Управління користувачами</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="IndexAuto">Автомобілі</a>
                         </li>
@@ -49,28 +51,39 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="BodyTypes" asp-action="Index">Тип кузова</a>
                         </li>
+
                         @if (User.IsInRole("admin"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="IndexOrder">Замовлення</a>
-                            </li>}
-                        @if (User.IsInRole("admin"))
-                        {
+                            </li>
+                        }
+
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="OrderTypes" asp-action="Index">Тип замовлення</a>
-                        </li>}
+                            <a class="nav-link text-dark" asp-area="" asp-controller="OrderTypes" asp-action="Index">Доступні послуги</a>
+                        </li>
                         <!-- <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">Сервіс</a>
     </li>-->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Managers" asp-action="Index">Менеджери</a>
                         </li>
+
                         @if (User.IsInRole("admin"))
                         {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Клієнти</a>
-                        </li>}
-                    </ul>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Клієнти</a>
+                            </li>
+                        }
+                        @if (!User.IsInRole("admin"))
+                        {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Замовити дзвінок</a>
+                    </li>
+                        }
+
+                        </ul>
                 </div>
             </div>
         </nav>

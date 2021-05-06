@@ -70,27 +70,28 @@ namespace AutoShowWebApplication
                 entity.HasOne(d => d.BodyType)
                     .WithMany(p => p.Cars)
                     .HasForeignKey(d => d.BodyTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Cars_BodyTypes");
+                    .OnDelete(DeleteBehavior.Cascade);
+                // .HasConstraintName("FK_Cars_BodyTypes");
 
                 entity.HasOne(d => d.Color)
                     .WithMany(p => p.Cars)
                     .HasForeignKey(d => d.ColorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Cars_Colors");
+                    .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_Cars_Colors");
 
                 entity.HasOne(d => d.Drive)
                     .WithMany(p => p.Cars)
                     .HasForeignKey(d => d.DriveId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Cars_Drive");
+                    .OnDelete(DeleteBehavior.Cascade);
+                //.HasConstraintName("FK_Cars_Drive");
 
                 entity.HasOne(d => d.Model)
                     .WithMany(p => p.Cars)
                     .HasForeignKey(d => d.ModelId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Cars_Models");
-            });
+                    .OnDelete(DeleteBehavior.Cascade);
+                   // .HasConstraintName("FK_Cars_Models");
+            })
+                ;
 
             modelBuilder.Entity<Color>(entity =>
             {

@@ -3,8 +3,13 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Додати клієнта</h1>
+@if (!User.IsInRole("admin"))
+{
+    <h1>Замовлення дзвінка</h1>}
+@if (User.IsInRole("admin"))
+{
+    <h1>Додати клієнта</h1>
+}
 
 <h4>Клієнт</h4>
 <hr />
@@ -27,9 +32,17 @@
                 <input asp-for="Telephone" class="form-control" />
                 <span asp-validation-for="Telephone" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Створити" class="btn btn-primary" />
-            </div>
+            @if (User.IsInRole("admin"))
+            {
+                <div class="form-group">
+                    <input type="submit" value="Створити" class="btn btn-primary" />
+                </div>}
+            @if (!User.IsInRole("admin"))
+            {
+                <div class="form-group">
+                    <input type="submit" value="Замовити" class="btn btn-primary" />
+                </div>
+            }
         </form>
     </div>
 </div>

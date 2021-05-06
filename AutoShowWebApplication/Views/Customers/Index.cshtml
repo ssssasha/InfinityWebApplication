@@ -3,45 +3,56 @@
 @{
     ViewData["Title"] = "Клієнти";
 }
-
-<h1>Список клієнтів</h1>
-
-<p>
-    <a asp-action="Create">Додати клієнта</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telephone)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telephone)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId">Редагувати</a> |
-                <a asp-action="Details" asp-route-id="@item.CustomerId">Деталі</a> |
-                <a asp-action="Delete" asp-route-id="@item.CustomerId">Видалити</a>
-            </td>
-        </tr>
+@if (!User.IsInRole("admin"))
+{<h3>Залиште свої контактні дані і наш менеджер зв'яжеться з Вами найближчим часом.</h3>
+    <p>
+        <a asp-action="Create">Замовити дзвінок</a>
+    </p>
 }
-    </tbody>
-</table>
+
+
+@if (User.IsInRole("admin"))
+{
+    
+    <h1>Список клієнтів</h1>
+    <p>
+        <a asp-action="Create">Додати клієнта</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telephone)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telephone)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CustomerId">Редагувати</a> |
+                        <a asp-action="Details" asp-route-id="@item.CustomerId">Деталі</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CustomerId">Видалити</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
