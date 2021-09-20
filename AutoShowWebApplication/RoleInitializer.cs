@@ -11,8 +11,8 @@ namespace AutoShowWebApplication
     {
         public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            string adminEmail = "";
-            string password = "";
+            string adminEmail = "sashaaazq@gmail.com";
+            string password = "qweasd1Q";
             if (await roleManager.FindByNameAsync("admin") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("admin"));

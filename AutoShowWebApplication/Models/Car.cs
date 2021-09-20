@@ -24,6 +24,8 @@ namespace AutoShowWebApplication
         public int? ColorId { get; set; }
         [Display(Name = "Тип приводу")]
         public int? DriveId { get; set; }
+        [Display(Name = "Фото")]
+        public byte[] Image { get; set; }
 
         [Display(Name = "Тип кузова")]
         public virtual BodyType BodyType { get; set; }

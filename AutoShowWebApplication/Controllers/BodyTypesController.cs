@@ -39,8 +39,8 @@ namespace AutoShowWebApplication.Controllers
                 return NotFound();
             }
 
-            //return View(bodyType);
-            return RedirectToAction("IndexM", "Cars", new { id = bodyType.BodyTypeId, name = bodyType.BodyTypeNames });
+            return View(bodyType);
+            //return RedirectToAction("IndexM", "Cars", new { id = bodyType.BodyTypeId, name = bodyType.BodyTypeNames });
         }
 
         // GET: BodyTypes/Create

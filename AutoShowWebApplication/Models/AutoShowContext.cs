@@ -27,14 +27,13 @@ namespace AutoShowWebApplication
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderType> OrderTypes { get; set; }
         public virtual DbSet<Service> Services { get; set; }
-        //public virtual DbSet<Photo> Photo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server= HP-440G6; Database=AutoShow; Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server= WIN-VCDRI1UG58U; Database=AutoShow; Trusted_Connection=True;");
             }
         }
 
@@ -67,11 +66,13 @@ namespace AutoShowWebApplication
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
+                entity.Property(e => e.Image).HasColumnType("bite");
+
                 entity.HasOne(d => d.BodyType)
                     .WithMany(p => p.Cars)
                     .HasForeignKey(d => d.BodyTypeId)
                     .OnDelete(DeleteBehavior.Cascade);
-                // .HasConstraintName("FK_Cars_BodyTypes");
+                   // .HasConstraintName("FK_Cars_BodyTypes");
 
                 entity.HasOne(d => d.Color)
                     .WithMany(p => p.Cars)
@@ -89,7 +90,8 @@ namespace AutoShowWebApplication
                     .WithMany(p => p.Cars)
                     .HasForeignKey(d => d.ModelId)
                     .OnDelete(DeleteBehavior.Cascade);
-                   // .HasConstraintName("FK_Cars_Models");
+                // .HasConstraintName("FK_Cars_Models");
+
             })
                 ;
 
@@ -151,6 +153,7 @@ namespace AutoShowWebApplication
                     .IsRequired()
                     .HasMaxLength(50);
             });
+
 
             modelBuilder.Entity<Order>(entity =>
             {

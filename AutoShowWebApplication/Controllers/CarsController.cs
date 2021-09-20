@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AutoShowWebApplication;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using AutoShowWebApplication.Models;
+using AutoShowWebApplication.ViewModels;
 using ClosedXML.Excel;
 
 namespace AutoShowWebApplication.Controllers
@@ -15,7 +17,7 @@ namespace AutoShowWebApplication.Controllers
     public class CarsController : Controller
     {
         private readonly AutoShowContext _context;
-
+        
         public CarsController(AutoShowContext context)
         {
             _context = context;
@@ -58,6 +60,7 @@ namespace AutoShowWebApplication.Controllers
                 .Include(c => c.Color)
                 .Include(c => c.Drive)
                 .Include(c => c.Model)
+               // .Include(c => c.Photo)
                 .FirstOrDefaultAsync(m => m.CarId == id);
             if (car == null)
             {
@@ -68,13 +71,44 @@ namespace AutoShowWebApplication.Controllers
         }
 
         // GET: Cars/Create
-        public IActionResult CreateAuto()
+        public IActionResult CreateAuto(CarViewModel cvm)
         {
+            Car car = new Car
+            {
+                BodyTypeId = cvm.BodyTypeId,
+                ColorId = cvm.ColorId,
+                DriveId = cvm.DriveId,
+                ModelId = cvm.ModelId,
+
+                CarId = cvm.CarId,
+                Price = cvm.Price,
+                GraduationYear = cvm.GraduationYear,
+
+
+            };
+            if (ModelState.IsValid)
+            {
+                if (cvm.Image != null)
+                {
+                    byte[] imageData = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(cvm.ImageFile.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)cvm.Image.Length);
+                    }
+                    // установка массива байтов
+                    car.Image = imageData;
+                }
+                _context.Add(car);
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(IndexAuto));
+
+            }
             ViewData["BodyTypeId"] = new SelectList(_context.BodyTypes, "BodyTypeId", "BodyTypeNames");
             ViewData["ColorId"] = new SelectList(_context.Colors, "ColorId", "ColorName");
             ViewData["DriveId"] = new SelectList(_context.Drives, "DriveId", "DriveType");
             ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName");
-
             return View();
         }
 
@@ -84,8 +118,8 @@ namespace AutoShowWebApplication.Controllers
             ViewData["ColorId"] = new SelectList(_context.Colors, "ColorId", "ColorName");
             //ViewData["DriveId"] = new SelectList(_context.Drives, "DriveId", "DriveType");
             ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName");
+            ViewData["PhotoId"] = new SelectList(_context.Models, "PhotoId", "Image");
 
-            
 
             ViewBag.DriveId = driveId;
             ViewBag.DriveType = _context.Drives.Where(c => c.DriveId == driveId).FirstOrDefault().DriveType;
@@ -100,6 +134,7 @@ namespace AutoShowWebApplication.Controllers
             ViewData["ColorId"] = new SelectList(_context.Colors, "ColorId", "ColorName");
             ViewData["DriveId"] = new SelectList(_context.Drives, "DriveId", "DriveType");
             ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName");
+            ViewData["PhotoId"] = new SelectList(_context.Models, "PhotoId", "Image");
 
             ViewBag.BodyTypeId = bodytypeId;
             ViewBag.BodyTypeNames = _context.BodyTypes.Where(c => c.BodyTypeId == bodytypeId).FirstOrDefault().BodyTypeNames;
@@ -114,7 +149,7 @@ namespace AutoShowWebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAuto( [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId")] Car car)
+        public async Task<IActionResult> CreateAuto( [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId, Image")] Car car)
         {
             
 
@@ -130,6 +165,7 @@ namespace AutoShowWebApplication.Controllers
             ViewData["ColorId"] = new SelectList(_context.Colors, "ColorId", "ColorName", car.ColorId);
             ViewData["DriveId"] = new SelectList(_context.Drives, "DriveId", "DriveType", car.DriveId);
             ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName", car.ModelId);
+          //  ViewData["PhotoId"] = new SelectList(_context.Photos, "PhotoId", "Image", car.PhotoId);
 
             return View(car);
            
@@ -138,7 +174,7 @@ namespace AutoShowWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int driveId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId")] Car car)
+        public async Task<IActionResult> Create(int driveId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId, Image")] Car car)
         {
             car.DriveId = driveId;
       
@@ -161,7 +197,7 @@ namespace AutoShowWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateM(int bodytypeId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId")] Car car)
+        public async Task<IActionResult> CreateM(int bodytypeId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId, Image")] Car car)
         {
             
             car.BodyTypeId = bodytypeId;
@@ -206,7 +242,7 @@ namespace AutoShowWebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId, Image")] Car car)
         {
             if (id != car.CarId)
             {
@@ -243,6 +279,7 @@ namespace AutoShowWebApplication.Controllers
         // GET: Cars/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();

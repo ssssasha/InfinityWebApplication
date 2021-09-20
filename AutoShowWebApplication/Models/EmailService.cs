@@ -13,7 +13,7 @@ namespace AutoShowWebApplication.Models
         {
             var emailMessage = new MimeMessage();
 
-            emailMessage.From.Add(new MailboxAddress("Адміністрація сайта Infinity", "sofia.bilinska2002@gmail.com"));
+            emailMessage.From.Add(new MailboxAddress("Адміністрація сайта Infinity", "sashaaazq@gmail.com"));
             emailMessage.To.Add(new MailboxAddress("", email));
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
@@ -24,7 +24,7 @@ namespace AutoShowWebApplication.Models
             using (var client = new SmtpClient())
             {
                 await client.ConnectAsync("smtp.gmail.com", 465, true);
-                await client.AuthenticateAsync("sofia.bilinska2002@gmail.com", "590g50y89A");
+                await client.AuthenticateAsync("sashaaazq@gmail.com", "qweasd1Q");
                 await client.SendAsync(emailMessage);
 
                 await client.DisconnectAsync(true);
