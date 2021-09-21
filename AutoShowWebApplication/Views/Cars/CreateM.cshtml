@@ -32,10 +32,10 @@
                 <input asp-for="GraduationYear" class="form-control" />
                 <span asp-validation-for="GraduationYear" class="text-danger"></span>
             </div>
-           <!-- <div class="form-group">
-                <label asp-for="BodyTypeId" class="control-label"></label>
-                <select asp-for="BodyTypeId" class="form-control" asp-items="ViewBag.BodyTypeId"></select>
-            </div>-->
+            <!-- <div class="form-group">
+         <label asp-for="BodyTypeId" class="control-label"></label>
+         <select asp-for="BodyTypeId" class="form-control" asp-items="ViewBag.BodyTypeId"></select>
+     </div>-->
             <div class="form-group">
                 <label asp-for="ColorId" class="control-label"></label>
                 <select asp-for="ColorId" class="form-control" asp-items="ViewBag.ColorId"></select>
@@ -44,8 +44,13 @@
                 <label asp-for="DriveId" class="control-label"></label>
                 <select asp-for="DriveId" class="form-control" asp-items="ViewBag.DriveId"></select>
             </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" type="file" class="form-control" />
+            </div>
 
-            <input type ="hidden" value="@ViewBag.BodyTypeId" name=" BodyTypeId" />
+
+            <input type="hidden" value="@ViewBag.BodyTypeId" name=" BodyTypeId" />
 
             <div class="form-group">
                 <input type="submit" value="Створити" class="btn btn-primary" />

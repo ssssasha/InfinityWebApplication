@@ -16,16 +16,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" asp-controller="Home" method="post" enctype="multipart/form-data">
-            <p>
-                <label>Image</label>
-                <input name="Image" type="file" class="form-control" />
-            </p>
-            <p>
-                <input type="submit" value="Добавить" />
-            </p>
-        </form>
-        <form asp-action="CreateAuto">
+        <form asp-action="Create" asp-controller="Cars" method="post" enctype="multipart/form-data">
+          
+            
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ModelId" class="control-label"></label>
@@ -53,7 +46,10 @@
                 <label asp-for="DriveId" class="control-label"></label>
                 <select asp-for="DriveId" class="form-control" asp-items="ViewBag.DriveId"></select>
             </div>
-
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" type="file" class="form-control" />
+            </div>
 
             <div class="form-group">
                 <input type="submit" value="Створити" class="btn btn-primary" />

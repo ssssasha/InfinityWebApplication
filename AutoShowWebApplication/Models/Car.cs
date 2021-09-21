@@ -16,8 +16,8 @@ namespace AutoShowWebApplication
         [Range(0,500000, ErrorMessage = "Введено некоректну ціну")]
         public decimal Price { get; set; }
         [Display(Name = "Рік випуску")]
-        [Range(2000, 2021, ErrorMessage = "Введено некоректний рік")]
-        public DateTime GraduationYear { get; set; }
+        [Range(2000, 2030, ErrorMessage = "Введено некоректний рік")]
+        public int GraduationYear { get; set; }
         [Display(Name = "Тип кузова")]
         public int? BodyTypeId { get; set; }
         [Display(Name = "Назва кольору")]

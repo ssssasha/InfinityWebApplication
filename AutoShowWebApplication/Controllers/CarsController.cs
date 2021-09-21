@@ -69,8 +69,22 @@ namespace AutoShowWebApplication.Controllers
 
             return View(car);
         }
+        // GET: Сars/Create
+        public IActionResult CreateAuto()
+        {
+            ViewData["BodyTypeId"] = new SelectList(_context.BodyTypes, "BodyTypeId", "BodyTypeNames");
+            ViewData["ColorId"] = new SelectList(_context.Colors, "ColorId", "ColorName");
+            ViewData["DriveId"] = new SelectList(_context.Drives, "DriveId", "DriveType");
+            ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName");
 
-        // GET: Cars/Create
+            return View();
+        }
+
+        // POST: Cars/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateAuto(CarViewModel cvm)
         {
             Car car = new Car
@@ -109,9 +123,36 @@ namespace AutoShowWebApplication.Controllers
             ViewData["ColorId"] = new SelectList(_context.Colors, "ColorId", "ColorName");
             ViewData["DriveId"] = new SelectList(_context.Drives, "DriveId", "DriveType");
             ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName");
-            return View();
+            return View(car);
         }
+        // POST: Cars/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateAuto([Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId, Image")] Car car)
+        {
 
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(car);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(IndexAuto));
+
+
+            }
+            ViewData["BodyTypeId"] = new SelectList(_context.BodyTypes, "BodyTypeId", "BodyTypeNames", car.BodyTypeId);
+            ViewData["ColorId"] = new SelectList(_context.Colors, "ColorId", "ColorName", car.ColorId);
+            ViewData["DriveId"] = new SelectList(_context.Drives, "DriveId", "DriveType", car.DriveId);
+            ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName", car.ModelId);
+            //  ViewData["PhotoId"] = new SelectList(_context.Photos, "PhotoId", "Image", car.PhotoId);
+
+            return View(car);
+
+
+        }*/
         public IActionResult Create(int driveId)
         {
             ViewData["BodyTypeId"] = new SelectList(_context.BodyTypes, "BodyTypeId", "BodyTypeNames");
@@ -147,34 +188,11 @@ namespace AutoShowWebApplication.Controllers
         // POST: Cars/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAuto( [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId, Image")] Car car)
-        {
-            
-
-            if (ModelState.IsValid)
-            {
-                _context.Add(car);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(IndexAuto));
-                
-
-            }
-            ViewData["BodyTypeId"] = new SelectList(_context.BodyTypes, "BodyTypeId", "BodyTypeNames", car.BodyTypeId);
-            ViewData["ColorId"] = new SelectList(_context.Colors, "ColorId", "ColorName", car.ColorId);
-            ViewData["DriveId"] = new SelectList(_context.Drives, "DriveId", "DriveType", car.DriveId);
-            ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName", car.ModelId);
-          //  ViewData["PhotoId"] = new SelectList(_context.Photos, "PhotoId", "Image", car.PhotoId);
-
-            return View(car);
-           
-
-        }
+       
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int driveId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId, Image")] Car car)
+        public async Task<IActionResult> Create(int driveId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId,Image")] Car car)
         {
             car.DriveId = driveId;
       
@@ -197,7 +215,7 @@ namespace AutoShowWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateM(int bodytypeId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId, Image")] Car car)
+        public async Task<IActionResult> CreateM(int bodytypeId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId,Image")] Car car)
         {
             
             car.BodyTypeId = bodytypeId;
@@ -242,7 +260,7 @@ namespace AutoShowWebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId, Image")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId,Image")] Car car)
         {
             if (id != car.CarId)
             {

@@ -17,7 +17,7 @@ namespace AutoShowWebApplication.ViewModels
         [Range(0, 500000, ErrorMessage = "Введено некоректну ціну")]
         public decimal Price { get; set; }
         [Display(Name = "Рік випуску")]
-        public DateTime GraduationYear { get; set; }
+        public int GraduationYear { get; set; }
         [Display(Name = "Тип кузова")]
         public int? BodyTypeId { get; set; }
         [Display(Name = "Назва кольору")]

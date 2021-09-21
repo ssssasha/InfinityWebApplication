@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.Collections.Generic;
 
 #nullable disable
 
@@ -60,7 +61,7 @@ namespace AutoShowWebApplication
 
                 entity.Property(e => e.DriveId).HasColumnName("DriveID");
 
-                entity.Property(e => e.GraduationYear).HasColumnType("date");
+                entity.Property(e => e.GraduationYear).HasColumnType("int");
 
                 entity.Property(e => e.ModelId).HasColumnName("ModelID");
 
@@ -71,8 +72,8 @@ namespace AutoShowWebApplication
                 entity.HasOne(d => d.BodyType)
                     .WithMany(p => p.Cars)
                     .HasForeignKey(d => d.BodyTypeId)
-                    .OnDelete(DeleteBehavior.Cascade);
-                   // .HasConstraintName("FK_Cars_BodyTypes");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_Cars_BodyTypes");
 
                 entity.HasOne(d => d.Color)
                     .WithMany(p => p.Cars)
@@ -83,14 +84,14 @@ namespace AutoShowWebApplication
                 entity.HasOne(d => d.Drive)
                     .WithMany(p => p.Cars)
                     .HasForeignKey(d => d.DriveId)
-                    .OnDelete(DeleteBehavior.Cascade);
-                //.HasConstraintName("FK_Cars_Drive");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_Cars_Drive");
 
                 entity.HasOne(d => d.Model)
                     .WithMany(p => p.Cars)
                     .HasForeignKey(d => d.ModelId)
-                    .OnDelete(DeleteBehavior.Cascade);
-                // .HasConstraintName("FK_Cars_Models");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_Cars_Models");
 
             })
                 ;
