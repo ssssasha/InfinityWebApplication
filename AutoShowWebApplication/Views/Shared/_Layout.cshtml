@@ -4,12 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Infiniti</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap_lux.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css" integrity="sha384-OLYO0LymqQ+uHXELyx93kblK5YIS3B2ZfLGBmsJaUyor7CpMTBsahDHByqSuWW+q" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap_lux.css" />
 </head>
-<body>
+<body >
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" alt="Інфініті ВІДІ Ліберті logo" style="visibility: visible;"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -19,11 +22,11 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <!--<li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-    </li>-->
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>-->
                         @if (User.IsInRole("admin"))
                         {
                             <li class="nav-item">
@@ -35,40 +38,42 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Управління користувачами</a>
                             </li>
-                        }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="IndexAuto">Автомобілі</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Colors" asp-action="Index">Кольори</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Models" asp-action="Index">Моделі</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Drifes" asp-action="Index">Тип приводу</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="BodyTypes" asp-action="Index">Тип кузова</a>
-                        </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="IndexAuto">Автомобілі</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Colors" asp-action="Index">Кольори</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Models" asp-action="Index">Моделі</a>
+                            </li>
+                            <!--
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Drifes" asp-action="Index">Тип приводу</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="BodyTypes" asp-action="Index">Тип кузова</a>
+                            </li>-->
+                        }
                         @if (User.IsInRole("admin"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="IndexOrder">Замовлення</a>
                             </li>
+
+
+
+                            <!--<li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="OrderTypes" asp-action="Index">Доступні послуги</a>
+                            </li>-->
+                            <!-- <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">Сервіс</a>
+                            </li>-->
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Managers" asp-action="Index">Менеджери</a>
+                            </li>
                         }
-
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="OrderTypes" asp-action="Index">Доступні послуги</a>
-                        </li>
-                        <!-- <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">Сервіс</a>
-    </li>-->
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Managers" asp-action="Index">Менеджери</a>
-                        </li>
 
                         @if (User.IsInRole("admin"))
                         {
@@ -79,6 +84,9 @@
                         @if (!User.IsInRole("admin"))
                         {
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="IndexAuto">Автомобілі</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Замовити дзвінок</a>
                             </li>
                         }
@@ -88,19 +96,70 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+
+
+
+    @RenderBody()
+
+    <!--<footer class="border-top footer text-muted">
+
+
+
         <div class="container">
             &copy; 2021 - AutoShowWebApplication - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+    </footer>-->
+
+    <footer style="position: relative; ">
+        <div class="container">
+            <p style="color: #fff; font-size: 17px; font-weight: bold; margin-top: 10px;">МИ В СОЦМЕРЕЖАХ</p>
+            <p style="max-width: 404px ; color: #fff; font-size: 15px;">Дізнавайтеся про акції і спецпропозиції, читайте статті, залишайте відгуки, задавайте питання, підписавшись на співтовариства</p>
+            <ul style="height: auto !important; justify-content: start; padding-left: 0;" class="networks">
+                <li>
+                    <a href="">
+                        <i class="fas fa-phone-square-alt"></i>
+                    </a>
+                </li>
+                <li style="margin-left: 20PX;">
+                    <a href="">
+                        <i class="fab fa-facebook-square"></i>
+                    </a>
+                </li>
+                <li style="margin-left: 20PX;">
+                    <a href="https://www.instagram.com/infiniti.ukraine/">
+                        <i class="fab fa-instagram-square"></i>
+                    </a>
+                </li>
+            </ul>
+            <div style="position: absolute; content: '';  width: 100%; height: 1px ; background:#000; right: 0; bottom: 50px;"></div>
+            <p style=" color: #fff; font-size: 15px; text-align: center; margin-top: 34px;">© 2020 INFINITI “ВІДІ-Ліберті”. Всі права захищені</p>
+        </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7olYNB4namNillixNuAXuifZPmNP4nWE&callback=initMap">
+    </script>
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            const uluru = { lat: 49.7539288, lng: 27.1502938 };
+            const ulusecond = { lat: 49.7539288, lng: 27.1502938 };
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 10,
+                center: uluru,
+            });
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+            });
+        }
+    </script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -60,7 +60,6 @@ namespace AutoShowWebApplication.Controllers
                 .Include(c => c.Color)
                 .Include(c => c.Drive)
                 .Include(c => c.Model)
-               // .Include(c => c.Photo)
                 .FirstOrDefaultAsync(m => m.CarId == id);
             if (car == null)
             {
@@ -97,6 +96,8 @@ namespace AutoShowWebApplication.Controllers
                 CarId = cvm.CarId,
                 Price = cvm.Price,
                 GraduationYear = cvm.GraduationYear,
+                Description = cvm.Description,
+                
 
 
             };
@@ -106,7 +107,7 @@ namespace AutoShowWebApplication.Controllers
                 {
                     byte[] imageData = null;
                     // считываем переданный файл в массив байтов
-                    using (var binaryReader = new BinaryReader(cvm.ImageFile.OpenReadStream()))
+                    using (var binaryReader = new BinaryReader(cvm.Image.OpenReadStream()))
                     {
                         imageData = binaryReader.ReadBytes((int)cvm.Image.Length);
                     }
@@ -159,7 +160,7 @@ namespace AutoShowWebApplication.Controllers
             ViewData["ColorId"] = new SelectList(_context.Colors, "ColorId", "ColorName");
             //ViewData["DriveId"] = new SelectList(_context.Drives, "DriveId", "DriveType");
             ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName");
-            ViewData["PhotoId"] = new SelectList(_context.Models, "PhotoId", "Image");
+            
 
 
             ViewBag.DriveId = driveId;
@@ -192,7 +193,7 @@ namespace AutoShowWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int driveId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId,Image")] Car car)
+        public async Task<IActionResult> Create(int driveId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId,Image,Description")] Car car)
         {
             car.DriveId = driveId;
       
@@ -215,7 +216,7 @@ namespace AutoShowWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateM(int bodytypeId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId,Image")] Car car)
+        public async Task<IActionResult> CreateM(int bodytypeId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId,Image,Description")] Car car)
         {
             
             car.BodyTypeId = bodytypeId;
@@ -260,7 +261,7 @@ namespace AutoShowWebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId,Image")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId,Image,Description")] Car car)
         {
             if (id != car.CarId)
             {

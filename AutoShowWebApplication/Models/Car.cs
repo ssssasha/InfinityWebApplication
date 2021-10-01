@@ -26,6 +26,7 @@ namespace AutoShowWebApplication
         public int? DriveId { get; set; }
         [Display(Name = "Фото")]
         public byte[] Image { get; set; }
+        public string Description {get; set;}
 
         [Display(Name = "Тип кузова")]
         public virtual BodyType BodyType { get; set; }

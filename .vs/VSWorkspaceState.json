@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\AutoShowWebApplication",
+    "\\AutoShowWebApplication\\Views",
+    "\\AutoShowWebApplication\\Views\\Cars",
+    "\\AutoShowWebApplication\\Views\\Shared"
   ],
   "SelectedNode": "\\AutoShowWebApplication.sln",
   "PreviewInSolutionExplorer": false

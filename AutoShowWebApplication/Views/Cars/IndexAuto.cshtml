@@ -10,15 +10,211 @@
     ViewData["Title"] = "Автомобілі";
 }
 
-<h1>Список автомобілів</h1>
 @if (User.IsInRole("admin"))
 {
-<p>
-    <a asp-action="CreateAuto">Додати автомобіль</a>
+    <p>
+        <a asp-action="CreateAuto">Додати автомобіль</a>
 
-</p>
+    </p>
 }
 
+
+<div class="bg">
+    <img src="/img/bg.jpg" alt="">
+</div>
+
+<section class="product">
+    <h1 style="text-align: center; margin-top: 30px;" class="title">
+        INFINITI
+    </h1>
+    <h3 style="text-align: center; margin-bottom: 30px; " class="subtitle">
+        МОДЕЛЬНИЙ РЯД
+    </h3>
+
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col col-4">
+                    <div class="card">
+                        <p class="product-name">
+                            @Html.DisplayFor(modelItem => item.Model.ModelName)
+                        </p>
+                        <p class="product-descriptions">
+                            @Html.DisplayFor(modelItem => item.Description)
+                            
+                        </p>
+                        @if (item.Image != null)
+                        {
+                            <img alt="" class="product-img" src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Image))" />
+                        }
+                        <!--<img src="/img/product.png" alt="" class="product-img">-->
+                        <p class="product-price">
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </p>
+                        <button>
+                            <a asp-action="Details" asp-route-id="@item.CarId">Детальніше</a>
+                          
+                        </button>
+
+                    </div>
+                </div>
+            }
+            <!--<div class="col col-4">
+                <div class="card">
+                    <p class="product-name">
+                        INFINITI Q50
+                    </p>
+                    <p class="product-descriptions">
+                        Найновіший рівень драйва, потужності та технологій
+                    </p>
+                    <img src="/img/product.png" alt="" class="product-img">
+                    <p class="product-price">
+                        30000$
+                    </p>
+                    <button>
+                        Детальніше
+                    </button>
+                </div>
+            </div>
+            <div class="col col-4">
+                <div class="card">
+                    <p class="product-name">
+                        INFINITI Q50
+                    </p>
+                    <p class="product-descriptions">
+                        Найновіший рівень драйва, потужності та технологій
+                    </p>
+                    <img src="/img/product.png" alt="" class="product-img">
+                    <p class="product-price">
+                        30000$
+                    </p>
+                    <button>
+                        Детальніше
+                    </button>
+                </div>
+            </div>
+            <div class="col col-4">
+                <div class="card">
+                    <p class="product-name">
+                        INFINITI Q50
+                    </p>
+                    <p class="product-descriptions">
+                        Найновіший рівень драйва, потужності та технологій
+                    </p>
+                    <img src="/img/product.png" alt="" class="product-img">
+                    <p class="product-price">
+                        30000$
+                    </p>
+                    <button>
+                        Детальніше
+                    </button>
+                </div>
+            </div>
+            <div class="col col-4">
+                <div class="card">
+                    <p class="product-name">
+                        INFINITI Q50
+                    </p>
+                    <p class="product-descriptions">
+                        Найновіший рівень драйва, потужності та технологій
+                    </p>
+                    <img src="/img/product.png" alt="" class="product-img">
+                    <p class="product-price">
+                        30000$
+                    </p>
+                    <button>
+                        Детальніше
+                    </button>
+                </div>
+            </div>
+            <div class="col col-4">
+                <div class="card">
+                    <p class="product-name">
+                        INFINITI Q50
+                    </p>
+                    <p class="product-descriptions">
+                        Найновіший рівень драйва, потужності та технологій
+                    </p>
+                    <img src="/img/product.png" alt="" class="product-img">
+                    <p class="product-price">
+                        30000$
+                    </p>
+                    <button>
+                        Детальніше
+                    </button>
+                </div>
+            </div>-->
+
+        </div>
+    </div>
+</section>
+
+
+<section style="margin-top: 80px;" class="contacts">
+    <div class="container">
+        <div class="row">
+            <div class="col col-6">
+                <h1 style="margin-top: 50px;" class="contact-title">
+                    КОНТАКТИ
+                </h1>
+
+
+                <div style="" class="info">
+                    <img src="/img/2232471 1.png" alt="" class="logo">
+                    <div class="block-info">
+                        <p class="info-title">
+                            АДРЕСА
+                        </p>
+                        <p style="max-width: 320px;" class="info-subtitle">
+                            с. Чубинське, вул. Київська 51.
+                            7 хвилин від Києва по Бориспільському шосе
+                        </p>
+                    </div>
+                </div>
+
+
+                <div style="display: flex;justify-content: space-between; margin-top: 100px;">
+                    <div class="info">
+                        <img src="/img/172517_phone_icon 1.png" alt="" class="logo">
+                        <div class="block-info">
+                            <p class="info-title">
+                                СЛУЖБА ПІДТРИМКИ
+                            </p>
+                            <p style="max-width: 320px;" class="info-subtitle">
+                                +38 (044) 591 70 38
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <img src="/img/3586360_email_envelope_mail_send_icon 1.png" alt="" class="logo">
+                        <div class="block-info">
+                            <p class="info-title">
+                                КОНТАКТНИЙ E-MAIL
+                            </p>
+                            <p style="max-width: 320px;" class="info-subtitle">
+                                service@infiniti-vidi.com
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col col-6">
+                <div id="map">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--
+
+
+    <h1>Список автомобілів</h1>
 
 <table class="table">
     <thead>
@@ -74,7 +270,7 @@
                 {
                     <img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Image))"/>
                 }
-                
+
             </td>
 
             @if (User.IsInRole("admin"))
@@ -83,7 +279,7 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.CarId">Редагувати</a> |
                     <a asp-action="Details" asp-route-id="@item.CarId">Деталі</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CarId">Видалити</a>
+                    
                 </td>
 
             }
@@ -96,12 +292,7 @@
                 </td>
             }
         </tr>
-        <div>
-            @if (item.Image != null)    
-            {
-                <img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Image))" />
-            }
-        </div>
+
         }
     </tbody>
-</table>
+</table>-->

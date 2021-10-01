@@ -5,16 +5,18 @@
 }
 
 @model IEnumerable<AutoShowWebApplication.Models.User>
+    <div style="padding:100px 0" class="container">
 
-<h2>Список користувачів</h2>
-<table class="table">
-    @foreach (var user in Model)
-    {
-        <tr>
-            <td>@user.Email</td>
-            <td>
-                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">Права доступу</a>
-            </td>
-        </tr>
-    }
-</table>
+        <h2>Список користувачів</h2>
+        <table class="table">
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">Права доступу</a>
+                    </td>
+                </tr>
+            }
+        </table>
+</div>

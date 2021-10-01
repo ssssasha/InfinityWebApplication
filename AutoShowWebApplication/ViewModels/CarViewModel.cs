@@ -24,6 +24,9 @@ namespace AutoShowWebApplication.ViewModels
         public int? ColorId { get; set; }
         [Display(Name = "Тип приводу")]
         public int? DriveId { get; set; }
+        public IFormFile Image{ get; set; }
+        public string Description { get; set; }
+        
 
         [Display(Name = "Тип кузова")]
         public virtual BodyType BodyType { get; set; }
@@ -33,7 +36,6 @@ namespace AutoShowWebApplication.ViewModels
         public virtual Drife Drive { get; set; }
         [Display(Name = "Модель")]
         public virtual Model Model { get; set; }
-        public IFormFile ImageFile { get; set; }
-        public byte[] Image { get; set; }
+       
     }
 }

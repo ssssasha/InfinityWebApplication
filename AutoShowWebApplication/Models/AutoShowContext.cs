@@ -65,9 +65,10 @@ namespace AutoShowWebApplication
 
                 entity.Property(e => e.ModelId).HasColumnName("ModelID");
 
-                entity.Property(e => e.Price).HasColumnType("money");
+                entity.Property(e => e.Price).HasColumnType("decimal");
 
-                entity.Property(e => e.Image).HasColumnType("bite");
+                entity.Property(e => e.Image).HasColumnType("varbinary(MAX)");
+                entity.Property(e => e.Description).HasColumnType("nvarchar(MAX)");
 
                 entity.HasOne(d => d.BodyType)
                     .WithMany(p => p.Cars)
