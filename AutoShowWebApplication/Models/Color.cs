@@ -11,13 +11,13 @@ namespace AutoShowWebApplication
     {
         public Color()
         {
-            Cars = new HashSet<Car>();
+          //  Cars = new HashSet<Car>();
         }
 
         public int ColorId { get; set; }
         [Display(Name = "Назва кольору")]
         public string ColorName { get; set; }
         
-        public virtual ICollection<Car> Cars { get; set; }
+        //public virtual ICollection<Car> Cars { get; set; }
     }
 }

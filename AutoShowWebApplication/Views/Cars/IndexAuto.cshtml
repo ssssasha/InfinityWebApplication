@@ -18,7 +18,6 @@
     </p>
 }
 
-
 <div class="bg">
     <img src="/img/bg.jpg" alt="">
 </div>
@@ -42,7 +41,7 @@
                         </p>
                         <p class="product-descriptions">
                             @Html.DisplayFor(modelItem => item.Description)
-                            
+
                         </p>
                         @if (item.Image != null)
                         {
@@ -53,101 +52,93 @@
                             @Html.DisplayFor(modelItem => item.Price)
                         </p>
                         <button>
-                            <a asp-action="Details" asp-route-id="@item.CarId">Детальніше</a>
-                          
+                            <a style="color:white" asp-action="Details" asp-route-id="@item.CarId">Детальніше</a>
+
                         </button>
 
                     </div>
                 </div>
             }
-            <!--<div class="col col-4">
-                <div class="card">
-                    <p class="product-name">
-                        INFINITI Q50
-                    </p>
-                    <p class="product-descriptions">
-                        Найновіший рівень драйва, потужності та технологій
-                    </p>
-                    <img src="/img/product.png" alt="" class="product-img">
-                    <p class="product-price">
-                        30000$
-                    </p>
-                    <button>
-                        Детальніше
-                    </button>
-                </div>
-            </div>
-            <div class="col col-4">
-                <div class="card">
-                    <p class="product-name">
-                        INFINITI Q50
-                    </p>
-                    <p class="product-descriptions">
-                        Найновіший рівень драйва, потужності та технологій
-                    </p>
-                    <img src="/img/product.png" alt="" class="product-img">
-                    <p class="product-price">
-                        30000$
-                    </p>
-                    <button>
-                        Детальніше
-                    </button>
-                </div>
-            </div>
-            <div class="col col-4">
-                <div class="card">
-                    <p class="product-name">
-                        INFINITI Q50
-                    </p>
-                    <p class="product-descriptions">
-                        Найновіший рівень драйва, потужності та технологій
-                    </p>
-                    <img src="/img/product.png" alt="" class="product-img">
-                    <p class="product-price">
-                        30000$
-                    </p>
-                    <button>
-                        Детальніше
-                    </button>
-                </div>
-            </div>
-            <div class="col col-4">
-                <div class="card">
-                    <p class="product-name">
-                        INFINITI Q50
-                    </p>
-                    <p class="product-descriptions">
-                        Найновіший рівень драйва, потужності та технологій
-                    </p>
-                    <img src="/img/product.png" alt="" class="product-img">
-                    <p class="product-price">
-                        30000$
-                    </p>
-                    <button>
-                        Детальніше
-                    </button>
-                </div>
-            </div>
-            <div class="col col-4">
-                <div class="card">
-                    <p class="product-name">
-                        INFINITI Q50
-                    </p>
-                    <p class="product-descriptions">
-                        Найновіший рівень драйва, потужності та технологій
-                    </p>
-                    <img src="/img/product.png" alt="" class="product-img">
-                    <p class="product-price">
-                        30000$
-                    </p>
-                    <button>
-                        Детальніше
-                    </button>
-                </div>
-            </div>-->
 
         </div>
     </div>
+</section>
+
+
+<section class="diagramD3" style="margin-top: 100px; margin-left: 200px; position: relative;">
+    <style>
+        .item {
+            position:relative;
+            margin-bottom: 7px;
+            font-size: 12px;
+            min-height: 20px;
+            min-width: 20px;
+            padding-right: 3px;
+            padding-top: 20px;
+            background-color: black;
+            text-align: right;
+            color: #f0f8ff;
+        }
+
+        .unselected {
+            display: none;
+        }
+    </style>
+    <select id="select" onchange="sort()">
+        <option selected disabled>Режим сортування</option>
+        <option value="compareByYear">За роком</option>
+        <option value="compareByPrice">За ціною</option>
+    </select><br /><br />
+    <div class="diagram">
+    </div>
+    <script type="text/javascript" src = "https://d3js.org/d3.v4.min.js">
+        var cars = [{ model: 'Infiniti QX50', price: 42000 },
+        { model: 'Infiniti QX80', price: 65000 },
+        { model: 'Infiniti Q60', price: 52000 },
+        { model: 'Infiniti QX60', price: 46000 },
+        { model: 'Infiniti Q50', price: 30000 },
+        { model: 'Infiniti QX55', price: 46000 }];
+
+        function showGraph(cars, comparator) {
+            d3.select('div.diagram').selectAll('div.item').data(cars).enter().append('div')
+                .attr('class', 'item').append('span');
+
+            d3.select('div.diagram').selectAll('div.item').data(cars)
+                .attr("class", "item").style('width', function (d) { return (d.price * 6) + 'px'; })
+                .select('span').text(function (d) { return d.model; });
+
+            d3.select('div.diagram').selectAll('div.item').data(cars).exit().remove();
+            if (comparator) {
+                d3.select("div.diagram").selectAll("div.item").sort(comparator);
+            }
+        }
+
+        var compareByModel = function (a, b) { // <-F
+            return a.model < b.model ? -1 : 1;
+        };
+
+        var compareByPrice = function (a, b) { // <-G
+            return a.price < b.price ? -1 : 1;
+        };
+
+        function sort() {
+            var comparator = document.getElementById("select").value;
+            switch (comparator) {
+
+                case "compareByModel":
+                    comparator = compareByModel;
+                    break;
+                case "compareByPrice":
+                    comparator = compareByPrice;
+                    break;
+            }
+
+            showGraph(cars, comparator);
+        }
+
+        showGraph(cars);
+    </script>
+
 </section>
 
 
@@ -155,7 +146,7 @@
     <div class="container">
         <div class="row">
             <div class="col col-6">
-                <h1 style="margin-top: 50px;" class="contact-title">
+                <h1 style="margin-top: 50px; margin-bottom: 30px;" class="contact-title">
                     КОНТАКТИ
                 </h1>
 
@@ -166,15 +157,28 @@
                         <p class="info-title">
                             АДРЕСА
                         </p>
+
                         <p style="max-width: 320px;" class="info-subtitle">
+                            Infiniti VIDI Liberty
                             с. Чубинське, вул. Київська 51.
                             7 хвилин від Києва по Бориспільському шосе
                         </p>
+                        <br />
+                        <p style="max-width: 320px;" class="info-subtitle">
+                            Infiniti Auto-Aktiv
+                            м. Київ, проспект Перемоги 134
+                        </p>
+                        <br />
+                        <p style="max-width: 320px;" class="info-subtitle">
+                            Infiniti Liga Lux
+                            м. Хмельницький, вулиця Свободи, 15/1-Б
+                        </p>
+
                     </div>
                 </div>
 
 
-                <div style="display: flex;justify-content: space-between; margin-top: 100px;">
+                <div style="display: flex;justify-content: space-between; margin-top: 50px;">
                     <div class="info">
                         <img src="/img/172517_phone_icon 1.png" alt="" class="logo">
                         <div class="block-info">
@@ -279,7 +283,7 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.CarId">Редагувати</a> |
                     <a asp-action="Details" asp-route-id="@item.CarId">Деталі</a> |
-                    
+
                 </td>
 
             }

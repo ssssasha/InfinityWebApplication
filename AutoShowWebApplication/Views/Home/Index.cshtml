@@ -1,27 +1,29 @@
 ﻿
-@{
-    ViewData["Title"] = "Лабораторна робота з ІСтаТП 2021. Infinity";
-}
+    @{
+        ViewData["Title"] = "Лабораторна робота з ІСтаТП 2021. Infinity";
+    }
 
 
-@if(User.Identity.IsAuthenticated)
-{
-<p>@User.Identity.Name</p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div style="padding:160px 0" class="container">
+            <p>@User.Identity.Name</p>
 
-<form method="post" asp-controller="Account" asp-action="Logout">
-    <input type="submit" value="Вихід" />
-</form>
-}
-else
-{
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <input type="submit" value="Вихід" />
+            </form>
+            </div>
+    }
+    else
+    {
 
-<div class="container">
+        <div class="container">
 
-    <div class="login-form">
-        <a asp-controller="Account" asp-action="Login">Вхід</a>
-        <a asp-controller="Account" asp-action="Register">Реєстація</a>
-    </div>
-   
-</div>
+            <div class="login-form">
+                <a asp-controller="Account" asp-action="Login">Вхід</a>
+                <a asp-controller="Account" asp-action="Register">Реєстація</a>
+            </div>
 
-}
+        </div>
+
+    }

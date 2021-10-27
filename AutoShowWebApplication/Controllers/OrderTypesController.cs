@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AutoShowWebApplication.Controllers
 {
-   
+    
     public class OrderTypesController : Controller
     {
         private readonly AutoShowContext _context;

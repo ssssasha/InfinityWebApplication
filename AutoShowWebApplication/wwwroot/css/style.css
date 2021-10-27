@@ -26,7 +26,24 @@ body {
 
 /* header start  */
 
-.header {
+.diagramD3 {
+    margin-top: 30px;
+}
+
+.item {
+    margin-bottom: 7px;
+    font-size: 12px;
+    min-height: 20px;
+    min-width: 20px;
+    padding-right: 3px;
+    padding-top: 6px;
+    background-color: black;
+    text-align: right;
+    color: #f0f8ff;
+    position:relative;
+}
+
+    .header {
     height: 80px;
     display: flex;
     align-items: center;
@@ -70,6 +87,7 @@ body {
     width: 100%;
     height: 80vh;
 }
+
 
 
 .card {
@@ -139,7 +157,7 @@ body {
 
 .info-subtitle {
     color: #6e6e6e;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 400;
     margin: 0;
 }
@@ -193,3 +211,47 @@ footer {
     text-align:center;
     text-decoration:none;
 }
+
+/*swipper style*/
+
+swiper-body {
+    position: relative;
+    height: 100%;
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }

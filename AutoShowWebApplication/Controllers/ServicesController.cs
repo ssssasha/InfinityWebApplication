@@ -9,6 +9,7 @@ using AutoShowWebApplication;
 
 namespace AutoShowWebApplication.Controllers
 {
+   
     public class ServicesController : Controller
     {
         private readonly AutoShowContext _context;
@@ -17,6 +18,7 @@ namespace AutoShowWebApplication.Controllers
         {
             _context = context;
         }
+
 
         // GET: Services
         public async Task<IActionResult> Index()

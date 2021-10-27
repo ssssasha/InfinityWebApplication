@@ -75,12 +75,12 @@ namespace AutoShowWebApplication
                     .HasForeignKey(d => d.BodyTypeId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Cars_BodyTypes");
-
+                /*
                 entity.HasOne(d => d.Color)
                     .WithMany(p => p.Cars)
                     .HasForeignKey(d => d.ColorId)
                     .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_Cars_Colors");
+                .HasConstraintName("FK_Cars_Colors");*/
 
                 entity.HasOne(d => d.Drive)
                     .WithMany(p => p.Cars)

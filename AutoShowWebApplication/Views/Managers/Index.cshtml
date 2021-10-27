@@ -1,53 +1,56 @@
 ﻿@model IEnumerable<AutoShowWebApplication.Manager>
+    <div style="padding:100px 0" class="container">
 
-@{
-    ViewData["Title"] = "Менеджери";
-}
+        @{
+            ViewData["Title"] = "Менеджери";
+        }
 
-<h1>Список менеджерів</h1>
-@if (User.IsInRole("admin"))
-{
-<p>
-    <a asp-action="Create">Додати нового менеджера</a>
-</p>}
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telephone)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telephone)
-            </td>
-            @if (User.IsInRole("admin"))
-            {
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ManagerId">Редагувати</a> |
-                    <a asp-action="Details" asp-route-id="@item.ManagerId">Деталі</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ManagerId">Видалити</a>
-                </td>
-}
-            @if (!User.IsInRole("admin"))
-            {
-                <td>
-                    
-                    <a asp-action="Details" asp-route-id="@item.ManagerId">Деталі</a> 
-                    
-                </td>
-}
-        </tr>
-}
-    </tbody>
-</table>
+        <h1>Список менеджерів</h1>
+        @if (User.IsInRole("admin"))
+        {
+            <p>
+                <a asp-action="Create">Додати нового менеджера</a>
+            </p>}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telephone)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telephone)
+                        </td>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ManagerId">Редагувати</a> |
+                                <a asp-action="Details" asp-route-id="@item.ManagerId">Деталі</a> |
+                                <a asp-action="Delete" asp-route-id="@item.ManagerId">Видалити</a>
+                            </td>
+                        }
+                        @if (!User.IsInRole("admin"))
+                        {
+                            <td>
+
+                                <a asp-action="Details" asp-route-id="@item.ManagerId">Деталі</a>
+
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>

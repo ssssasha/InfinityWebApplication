@@ -14,10 +14,11 @@ using ClosedXML.Excel;
 
 namespace AutoShowWebApplication.Controllers
 {
+
     public class CarsController : Controller
     {
         private readonly AutoShowContext _context;
-        
+
         public CarsController(AutoShowContext context)
         {
             _context = context;
@@ -29,6 +30,8 @@ namespace AutoShowWebApplication.Controllers
         {
             return View(await _context.Cars.Include(j => j.BodyType).Include(j => j.Color).Include(j => j.Drive).Include(j => j.Model).ToListAsync());
         }
+
+
         public async Task<IActionResult> Index(int? id, string? name)
         {
             //if (id == null) return RedirectToAction("Drifes", "Index");
@@ -42,7 +45,7 @@ namespace AutoShowWebApplication.Controllers
         {
             //if (id == null) return RedirectToAction("Drifes", "IndexM");
             ViewBag.BodyTypeId = id;
-            ViewBag.BodyTypeNames= name;
+            ViewBag.BodyTypeNames = name;
             var autoByBodyTypes = _context.Cars.Where(b => b.BodyTypeId == id).Include(b => b.BodyType).Include(j => j.Drive).Include(j => j.Model).Include(j => j.Color);
             return View(await autoByBodyTypes.ToListAsync());
         }
@@ -69,6 +72,7 @@ namespace AutoShowWebApplication.Controllers
             return View(car);
         }
         // GET: Сars/Create
+
         public IActionResult CreateAuto()
         {
             ViewData["BodyTypeId"] = new SelectList(_context.BodyTypes, "BodyTypeId", "BodyTypeNames");
@@ -97,7 +101,7 @@ namespace AutoShowWebApplication.Controllers
                 Price = cvm.Price,
                 GraduationYear = cvm.GraduationYear,
                 Description = cvm.Description,
-                
+
 
 
             };
@@ -160,13 +164,13 @@ namespace AutoShowWebApplication.Controllers
             ViewData["ColorId"] = new SelectList(_context.Colors, "ColorId", "ColorName");
             //ViewData["DriveId"] = new SelectList(_context.Drives, "DriveId", "DriveType");
             ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName");
-            
+
 
 
             ViewBag.DriveId = driveId;
             ViewBag.DriveType = _context.Drives.Where(c => c.DriveId == driveId).FirstOrDefault().DriveType;
 
-            
+
             return View();
         }
 
@@ -189,21 +193,21 @@ namespace AutoShowWebApplication.Controllers
         // POST: Cars/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-       
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int driveId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId,Image,Description")] Car car)
         {
             car.DriveId = driveId;
-      
+
             if (ModelState.IsValid)
             {
                 _context.Add(car);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
                 return RedirectToAction("Index", "Cars", new { id = driveId, name = _context.Drives.Where(c => c.DriveId == driveId).FirstOrDefault().DriveType });
-                
+
             }
             ViewData["BodyTypeId"] = new SelectList(_context.BodyTypes, "BodyTypeId", "BodyTypeNames", car.BodyTypeId);
             ViewData["ColorId"] = new SelectList(_context.Colors, "ColorId", "ColorName", car.ColorId);
@@ -211,14 +215,14 @@ namespace AutoShowWebApplication.Controllers
             ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName", car.ModelId);
             //return View(car);
             return RedirectToAction("Index", "Cars", new { id = driveId, name = _context.Drives.Where(c => c.DriveId == driveId).FirstOrDefault().DriveType });
-            
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateM(int bodytypeId, [Bind("CarId,ModelId,Price,GraduationYear,BodyTypeId,ColorId,DriveId,Image,Description")] Car car)
         {
-            
+
             car.BodyTypeId = bodytypeId;
             if (ModelState.IsValid)
             {
@@ -232,7 +236,7 @@ namespace AutoShowWebApplication.Controllers
             ViewData["DriveId"] = new SelectList(_context.Drives, "DriveId", "DriveType", car.DriveId);
             ViewData["ModelId"] = new SelectList(_context.Models, "ModelId", "ModelName", car.ModelId);
             //return View(car);
-            
+
             return RedirectToAction("IndexM", "Cars", new { id = bodytypeId, name = _context.BodyTypes.Where(c => c.BodyTypeId == bodytypeId).FirstOrDefault().BodyTypeNames });
         }
 
@@ -333,11 +337,22 @@ namespace AutoShowWebApplication.Controllers
         {
             return _context.Cars.Any(e => e.CarId == id);
         }
-        
-       
-            
-        
+        /*
+        static List<Car> cars = new List<Car>();
+
+        static CarsController()
+        {
+            cars.Add(new Car { CarId = 1, ModelId = , Price, GraduationYearColorName = "червоний" });
+        }
 
 
+        public ActionResult AutocompleteSearch(string term)
+        {
+            var models = cars.Where(a => a.Model.Contains(term))
+                            .Select(a => new { value = a.Model })
+                            .Distinct();
+
+            return Json(models);//JsonRequestBehavior.AllowGet);
+     }*/
     }
 }

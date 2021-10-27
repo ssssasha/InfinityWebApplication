@@ -9,6 +9,7 @@ using AutoShowWebApplication;
 
 namespace AutoShowWebApplication.Controllers
 {
+   
     public class ManagersController : Controller
     {
         private readonly AutoShowContext _context;

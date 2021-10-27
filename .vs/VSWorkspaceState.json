@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\AutoShowWebApplication",
+    "\\AutoShowWebApplication\\bin",
+    "\\AutoShowWebApplication\\Controllers",
     "\\AutoShowWebApplication\\Views",
-    "\\AutoShowWebApplication\\Views\\Cars",
     "\\AutoShowWebApplication\\Views\\Shared"
   ],
   "SelectedNode": "\\AutoShowWebApplication.sln",

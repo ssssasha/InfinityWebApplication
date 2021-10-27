@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace AutoShowWebApplication.Controllers
 {
+   
     public class UsersController : Controller
     {
         UserManager<User> _userManager;

@@ -11,6 +11,7 @@ using AutoShowWebApplication.ViewModel;
 
 namespace AutoShowWebApplication.Controllers
 {
+    
     public class AccountController : Controller
     {
        /* public IActionResult Index()
