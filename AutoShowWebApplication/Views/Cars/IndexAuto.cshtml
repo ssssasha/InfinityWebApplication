@@ -1,10 +1,12 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
 @{
 }
 
-@model IEnumerable<AutoShowWebApplication.Car>
+@model CarsListViewModel
+
 
 @{
     ViewData["Title"] = "Автомобілі";
@@ -21,7 +23,6 @@
 <div class="bg">
     <img src="/img/bg.jpg" alt="">
 </div>
-
 <section class="product">
     <h1 style="text-align: center; margin-top: 30px;" class="title">
         INFINITI
@@ -29,10 +30,27 @@
     <h3 style="text-align: center; margin-bottom: 30px; " class="subtitle">
         МОДЕЛЬНИЙ РЯД
     </h3>
+    <div>
+        <form method="get">
+            <label class="control-label" style="margin:10px">Тип приводу: </label>
+            @Html.DropDownList("drive", new SelectList(Model.Drives.OrderBy(s => s.DriveType), "DriveId", "DriveType").Append(new SelectListItem("Усі", null, true)),
+                        htmlAttributes: new { @class = "form-control" })
+            <label class="control-label" style="margin:10px">Колір: </label>
+            @Html.DropDownList("color", new SelectList(Model.Colors.OrderBy(s => s.ColorName), "ColorId", "ColorName").Append(new SelectListItem("Усі", null, true)),
+                        htmlAttributes: new { @class = "form-control" })
+            <label class="control-label" style="margin:10px">Рік: </label>
+            @Html.DropDownList("year", new SelectList(Model.Cars.Select(s => s.GraduationYear).Distinct().OrderByDescending(y => y)).Append(new SelectListItem("Усі", null, true)),
+                        htmlAttributes: new { @class = "form-control" })
+            <div class="form-inline">
+                <input type="submit" style="margin:10px" value="Фільтр" class="btn btn-outline-primary" />
+                <a asp-action="IndexAuto" style="margin:10px" class="btn btn-outline-primary">Скинути</a>
+            </div>
 
+        </form>
+    </div>
     <div class="container">
         <div class="row">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Cars)
             {
                 <div class="col col-4">
                     <div class="card">
@@ -68,7 +86,7 @@
 <section class="diagramD3" style="margin-top: 100px; margin-left: 200px; position: relative;">
     <style>
         .item {
-            position:relative;
+            position: relative;
             margin-bottom: 7px;
             font-size: 12px;
             min-height: 20px;
@@ -91,7 +109,7 @@
     </select><br /><br />
     <div class="diagram">
     </div>
-    <script type="text/javascript" src = "https://d3js.org/d3.v4.min.js">
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js">
         var cars = [{ model: 'Infiniti QX50', price: 42000 },
         { model: 'Infiniti QX80', price: 65000 },
         { model: 'Infiniti Q60', price: 52000 },
@@ -215,88 +233,3 @@
 </section>
 
 
-<!--
-
-
-    <h1>Список автомобілів</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GraduationYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BodyType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Drive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GraduationYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BodyType.BodyTypeNames)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color.ColorName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Drive.DriveType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model.ModelName)
-            </td>
-            <td>
-                @if (item.Image != null)
-                {
-                    <img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Image))"/>
-                }
-
-            </td>
-
-            @if (User.IsInRole("admin"))
-            {
-
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.CarId">Редагувати</a> |
-                    <a asp-action="Details" asp-route-id="@item.CarId">Деталі</a> |
-
-                </td>
-
-            }
-            @if (!User.IsInRole("admin"))
-            {
-                <td>
-
-                    <a asp-action="Details" asp-route-id="@item.CarId">Деталі</a>
-
-                </td>
-            }
-        </tr>
-
-        }
-    </tbody>
-</table>-->

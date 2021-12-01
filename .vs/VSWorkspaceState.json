@@ -3,8 +3,10 @@
     "",
     "\\AutoShowWebApplication",
     "\\AutoShowWebApplication\\bin",
-    "\\AutoShowWebApplication\\Controllers",
+    "\\AutoShowWebApplication\\Models",
     "\\AutoShowWebApplication\\Views",
+    "\\AutoShowWebApplication\\Views\\BodyTypes",
+    "\\AutoShowWebApplication\\Views\\Cars",
     "\\AutoShowWebApplication\\Views\\Shared"
   ],
   "SelectedNode": "\\AutoShowWebApplication.sln",

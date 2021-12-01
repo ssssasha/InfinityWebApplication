@@ -488,3 +488,10 @@ D:\proga\Auto\AutoShowWebApplication\obj\Debug\net5.0\AutoShowWebApplication.dll
 D:\proga\Auto\AutoShowWebApplication\obj\Debug\net5.0\ref\AutoShowWebApplication.dll
 D:\proga\Auto\AutoShowWebApplication\obj\Debug\net5.0\AutoShowWebApplication.pdb
 D:\proga\Auto\AutoShowWebApplication\obj\Debug\net5.0\AutoShowWebApplication.genruntimeconfig.cache
+D:\proga\Auto\AutoShowWebApplication\bin\Debug\net5.0\System.Web.Mvc.dll
+D:\proga\Auto\AutoShowWebApplication\bin\Debug\net5.0\System.Web.Razor.dll
+D:\proga\Auto\AutoShowWebApplication\bin\Debug\net5.0\System.Web.Helpers.dll
+D:\proga\Auto\AutoShowWebApplication\bin\Debug\net5.0\System.Web.WebPages.Deployment.dll
+D:\proga\Auto\AutoShowWebApplication\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
+D:\proga\Auto\AutoShowWebApplication\bin\Debug\net5.0\System.Web.WebPages.dll
+D:\proga\Auto\AutoShowWebApplication\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll

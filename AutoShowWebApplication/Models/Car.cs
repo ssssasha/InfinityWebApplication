@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -36,5 +37,24 @@ namespace AutoShowWebApplication
         public virtual Drife Drive { get; set; }
         [Display(Name = "Модель")]
         public virtual Model Model { get; set; }
+    }
+    public partial class CarsListViewModel
+    {
+        public CarsListViewModel(AutoShowContext context)
+        {
+            Cars = context.Cars;
+            Colors = context.Colors;
+            Drives = context.Drives;
+            //Years = context.Year;
+            SelectedColor = null;
+            SelectedDrive = null;
+
+        }
+        public IEnumerable<Car> Cars;
+        public DbSet<Color> Colors;
+        public int? SelectedColor { get; set; }
+        public DbSet<Drife> Drives;
+        public int? SelectedDrive { get; set; }
+
     }
 }

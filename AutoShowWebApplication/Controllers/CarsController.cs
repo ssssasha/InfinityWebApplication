@@ -17,21 +17,51 @@ namespace AutoShowWebApplication.Controllers
 
     public class CarsController : Controller
     {
+
         private readonly AutoShowContext _context;
 
         public CarsController(AutoShowContext context)
         {
             _context = context;
         }
-
+        private IEnumerable<Car> ApplyFilters(int? drive, int? color, int? year)
+        {
+            IEnumerable<Car> cars = from s in _context.Cars
+                                                      .Include(x => x.Drive)
+                                                      .Include(x => x.Color)
+                                        //.Include(x => x.BodyType)
+                                        //.Include(x => x.Model)
+                                    select s;
+            if (drive != null)
+            {
+                cars = cars.Where(c => c.DriveId == drive);
+            }
+            if (color != null)
+            {
+                cars = cars.Where(c => c.ColorId == color);
+            }
+            if (year != null)
+            {
+                cars = cars.Where(c => c.GraduationYear == year);
+            }
+            return cars;
+        }
         // GET: Cars
-
+        /*
         public async Task<IActionResult> IndexAuto()
         {
             return View(await _context.Cars.Include(j => j.BodyType).Include(j => j.Color).Include(j => j.Drive).Include(j => j.Model).ToListAsync());
+            
+        }*/
+        public async Task<IActionResult> IndexAuto(int? drive, int? color, int? year)
+        {
+           // ViewBag.cars =  new SelectList(_context.Drives.OrderBy(s => s.DriveType), "DriveId", "DriveType").Append(new SelectListItem("Усі", null, true));
+            //ViewData["DriveId"] = new SelectList(_context.Drives.OrderBy(s => s.DriveType), "DriveId", "DriveType").Append(new SelectListItem("Усі", null, true));
+            CarsListViewModel listModelView = new CarsListViewModel(_context);
+            listModelView.Cars = ApplyFilters(drive, color, year);
+            return View(listModelView);
         }
-
-
+       
         public async Task<IActionResult> Index(int? id, string? name)
         {
             //if (id == null) return RedirectToAction("Drifes", "Index");
@@ -41,6 +71,37 @@ namespace AutoShowWebApplication.Controllers
             return View(await autoByDrives.ToListAsync());
         }
 
+        /*
+        public ActionResult IndexFilter(int? drive, int year)
+        {
+            IQueryable<Car> cars = _context.Cars.Include(c => c.Drive);
+            if (drive != null &&  drive!= 0)
+            {
+                cars = cars.Where(c => c.DriveId == drive);
+            }
+            if (year != 0 && !year.Equals("Все"))
+            {
+                cars = cars.Where(c => c.GraduationYear == year);
+            }
+
+            List<Drive> drives = _context.Drives.ToList();
+            // устанавливаем начальный элемент, который позволит выбрать всех
+            drives.Insert(0, new Drive { DriveType = "Всі", DriveId = 0 });
+
+            DrivesListViewModel dlvm = new DrivesListViewModel
+            {
+                Cars = cars.ToList(),
+                Drives = new SelectList(drives, "DriveId", "DriveType"),
+                Years = new SelectList(new List<int>()
+            {
+                2019,
+                2020,
+                2021
+            })
+            };
+            return View(dlvm);
+        }
+        */
         public async Task<IActionResult> IndexM(int? id, string? name)
         {
             //if (id == null) return RedirectToAction("Drifes", "IndexM");
